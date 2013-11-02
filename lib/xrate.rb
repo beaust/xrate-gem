@@ -36,7 +36,7 @@ module Xrate
   # service. This is not a public facing web service, and is intended to be
   # consumed internally by GoCoin applications.
   #
-  def self.get_rates(base="USD")
+  def self.rates(base="USD")
     response = connection.get "/rates?base=#{base}"
     response.body
   end

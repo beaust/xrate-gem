@@ -43,4 +43,4 @@ Xrate.username = "user"
 Xrate.password = "password"
 
 # Get exchange rates
-rates = Xrate::Rates.get
+rates = Xrate.rates
