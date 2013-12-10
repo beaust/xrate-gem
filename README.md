@@ -1,7 +1,7 @@
 README
 ========
 
-Client gem for [Xrate](https://github.com/gc-admin/xrate) backend service.
+Client gem for [Xrate](https://github.com/GoCoin/xrate) backend service.
 
 This is not for public consumption. When frontend users are granted access to
 the exchange service, it should proxied through the MerchantCore API.

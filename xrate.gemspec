@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["ticean@gocoin.com"]
   gem.description   = %q{Ruby client for the GoCoin backend exchange rate service."}
   gem.summary       = %q{Ruby client for the GoCoin backend exchange rate service."}
-  gem.homepage      = "https://github.com/gc-admin/xrate-gem"
+  gem.homepage      = "https://github.com/GoCoin/xrate-gem"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
