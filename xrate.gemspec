@@ -2,8 +2,8 @@
 require File.expand_path('../lib/xrate/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Ticean Bennett"]
-  gem.email         = ["ticean@gocoin.com"]
+  gem.authors       = ["GoCoin"]
+  gem.email         = ["dev@gocoin.com"]
   gem.description   = %q{Ruby client for the GoCoin backend exchange rate service."}
   gem.summary       = %q{Ruby client for the GoCoin backend exchange rate service."}
   gem.homepage      = "https://github.com/GoCoin/xrate-gem"
