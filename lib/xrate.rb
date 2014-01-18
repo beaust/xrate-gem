@@ -41,13 +41,16 @@ module Xrate
     response.body
   end
 
-  def self.currency_pair(pair)
+  def self.currency_pair(pair, base_price)
     begin
-      response = connection.get "/rates?currency_pair=#{pair}"
+      if base_price.nil?
+        response = connection.get "/rates?currency_pair=#{pair}"
+      else
+        response = connection.get "/rates?currency_pair=#{pair}&amount=#{base_price}"
+      end
       response.body
     rescue
       { 'timestamp' => Time.now.utc, 'currency_pair' => pair, 'rates' => { pair.to_s => nil } }
     end
   end
 end
-# Xrate.currency_pair('BTCUSD')
