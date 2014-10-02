@@ -43,6 +43,8 @@ Xrate.username = "user"
 Xrate.password = "password"
 
 # Get exchange rates
+
+```
 ```
 rates = Xrate.rates
 rates = Xrate.currency_pair(pair, amount, price_depth)
