@@ -41,12 +41,16 @@ module Xrate
     response.body
   end
 
-  def self.currency_pair(pair, base_price)
+  def self.currency_pair(pair, base_price, price_depth=false)
     begin
       if base_price.nil?
         response = connection.get "/rates?currency_pair=#{pair}"
       else
-        response = connection.get "/rates?currency_pair=#{pair}&amount=#{base_price}"
+        if price_depth
+          response = connection.get "/rates?currency_pair=#{pair}&amount=#{base_price}&price_depth=true"
+        else
+          response = connection.get "/rates?currency_pair=#{pair}&amount=#{base_price}"
+        end
       end
       response.body
     rescue
