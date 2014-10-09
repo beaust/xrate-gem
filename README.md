@@ -44,12 +44,13 @@ Xrate.password = "password"
 
 # Get exchange rates
 rates = Xrate.rates
-rates = Xrate.currency_pair(pair, amount, price_depth)
+rates = Xrate.get_spot_rate(params_hash)
 ```
 ```
 ## example params
-# pair: 'BTCUSD'  # (required param)
-# amount: 1.0     # fiat amount if request has fiat base_price_currency
-                  # crypto amount if base_price_currency is crypto (required param)
-# price_depth: true   # optional param - should be set to true if base_price_currency is crypto
+# from: 'BTC'  # (required param)
+# to: 'USD'  # (required param)
+# amount_in_usd: 10.0 # given :from and :to above, this would return rate for converting ? BTC into 10.0 USD
+# amount_in_btc: 0.1 # given :from and :to above, this would return rate for converting 0.1 BTC into ? USD
+# Note that :amount_in_usd XOR :amount_in_btc param must be provided
 ```

@@ -4,10 +4,10 @@ Dir[File.expand_path('../../faraday/*.rb', __FILE__)].each{|f| require f}
 
 module Xrate
   module Connection
-    attr_writer :url, :username, :password
+    attr_writer :url, :username, :password, :api_version
 
     def url
-      @url ||= "https://xrate.gocoin.com"
+      @url.present? ? "#{@url}/v#{api_version}" : "https://xrate.gocoin.com/v#{api_version}"
     end
 
     def username
@@ -16,6 +16,10 @@ module Xrate
 
     def password
       @password ||= "password"
+    end
+
+    def api_version
+      @api_version ||= 2
     end
 
     def connection
