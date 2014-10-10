@@ -53,11 +53,11 @@ module Xrate
       if params["amount_in_#{params[:from].downcase}".to_sym].present?
         raise ArgumentError.new(":amount_in_#{params[:to].downcase} xor :amount_in_#{params[:from].downcase} must be provided")
       else
-        amount_arg = ":amount_in_#{params[:to].downcase}=#{params[":amount_in_#{params[:to].downcase}".to_sym]}"
+        amount_arg = "amount_in_#{params[:to].downcase}=#{params["amount_in_#{params[:to].downcase}".to_sym]}"
       end
     else
       if params["amount_in_#{params[:from].downcase}".to_sym].present?
-        amount_arg = ":amount_in_#{params[:from].downcase}=#{params[":amount_in_#{params[:from].downcase}".to_sym]}"
+        amount_arg = "amount_in_#{params[:from].downcase}=#{params["amount_in_#{params[:from].downcase}".to_sym]}"
       else
         raise ArgumentError.new(":amount_in_#{params[:to].downcase} xor :amount_in_#{params[:from].downcase} must be provided")
       end
