@@ -7,7 +7,7 @@ describe Xrate do
     it "should insert faraday logging middleware" do
       Xrate.instance_variable_set("@connection", nil)
       conn = double(:connection)
-      Faraday.should_receive(:new).with(url: Xrate.url).and_return(conn)
+      Faraday.should_receive(:new).with(url: "#{Xrate.url}/v#{Xrate.api_version}").and_return(conn)
       conn.should_receive(:response).with(:logger)
       Xrate.enable_faraday_logger
     end
@@ -23,6 +23,8 @@ describe Xrate do
       Xrate.config.username.should == "new_username"
       Xrate.config.password = "new_password"
       Xrate.config.password.should == "new_password"
+      Xrate.config.api_version = "new_api_version"
+      Xrate.config.api_version.should == "new_api_version"
     end
 
   end

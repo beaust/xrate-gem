@@ -7,7 +7,7 @@ module Xrate
     attr_writer :url, :username, :password, :api_version
 
     def url
-      @url.present? ? "#{@url}/v#{api_version}" : "https://xrate.gocoin.com/v#{api_version}"
+      @url ||= "https://xrate.gocoin.com"
     end
 
     def username
@@ -23,7 +23,7 @@ module Xrate
     end
 
     def connection
-      @api_connection ||= Faraday.new(url: url) do |faraday|
+      @api_connection ||= Faraday.new(url: "#{url}/v#{api_version}") do |faraday|
         faraday.request  :basic_auth, username, password
         faraday.request  :json
         faraday.response :json

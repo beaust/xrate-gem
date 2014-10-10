@@ -24,7 +24,7 @@ describe Xrate::Connection do
 
     it "should create and cache a faraday connection" do
       conn = double(:connection)
-      Faraday.should_receive(:new).with(url: @obj.url).and_return(conn)
+      Faraday.should_receive(:new).with(url: "#{@obj.url}/v#{@obj.api_version}").and_return(conn)
       @obj.connection.should == conn
       Faraday.should_not_receive(:new).with(@obj.url)
       @obj.connection
