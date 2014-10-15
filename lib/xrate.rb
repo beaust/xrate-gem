@@ -63,10 +63,7 @@ module Xrate
       end
     end
 
-    begin
-      response = connection.get "/rates?from=#{params[:from]}&to=#{params[:to]}&#{amount_arg}"
-    rescue
-      { 'timestamp' => Time.now.utc, 'from' => params[:from], 'to' => params[:to], 'spot_rate' => nil }
-    end
+    response = connection.get("/rates?from=#{params[:from]}&to=#{params[:to]}&#{amount_arg}")
+    response.body
   end
 end
