@@ -42,28 +42,8 @@ module Xrate
   end
 
   def self.get_spot_rate(params)
-    # :from (3 letter currency code)
-    # :to (3 letter currency code)
-    # :amount_in_### (###=3 letter currency code). must be :from XOR :to
-    raise ArgumentError.new(':from parameter must be provided') unless params[:from].present?
-    raise ArgumentError.new(':to parameter must be provided') unless params[:to].present?
-
-    amount_arg = nil
-    if params["amount_in_#{params[:to].downcase}".to_sym].present?
-      if params["amount_in_#{params[:from].downcase}".to_sym].present?
-        raise ArgumentError.new(":amount_in_#{params[:to].downcase} xor :amount_in_#{params[:from].downcase} must be provided")
-      else
-        amount_arg = "amount_in_#{params[:to].downcase}=#{params["amount_in_#{params[:to].downcase}".to_sym]}"
-      end
-    else
-      if params["amount_in_#{params[:from].downcase}".to_sym].present?
-        amount_arg = "amount_in_#{params[:from].downcase}=#{params["amount_in_#{params[:from].downcase}".to_sym]}"
-      else
-        raise ArgumentError.new(":amount_in_#{params[:to].downcase} xor :amount_in_#{params[:from].downcase} must be provided")
-      end
-    end
-
-    response = connection.get("/rates?from=#{params[:from]}&to=#{params[:to]}&#{amount_arg}")
+    raise ArgumentError.new('arguments must be a single key-value pair :from => :to') unless params.class == Hash && params.length == 1
+    response = connection.get("/rates?from=#{params.first[0]}&to=#{params.first[1]}")
     response.body
   end
 end
