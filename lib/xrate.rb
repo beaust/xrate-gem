@@ -41,20 +41,9 @@ module Xrate
     response.body
   end
 
-  def self.currency_pair(pair, base_price, price_depth=false)
-    begin
-      if base_price.nil?
-        response = connection.get "/rates?currency_pair=#{pair}"
-      else
-        if price_depth
-          response = connection.get "/rates?currency_pair=#{pair}&amount=#{base_price}&price_depth=true"
-        else
-          response = connection.get "/rates?currency_pair=#{pair}&amount=#{base_price}"
-        end
-      end
-      response.body
-    rescue
-      { 'timestamp' => Time.now.utc, 'currency_pair' => pair, 'rates' => { pair.to_s => nil } }
-    end
+  def self.get_spot_rate(params)
+    raise ArgumentError.new('arguments must be a single key-value pair :from => :to') unless params.class == Hash && params.length == 1
+    response = connection.get("/rates?from=#{params.first[0]}&to=#{params.first[1]}")
+    response.body
   end
 end
