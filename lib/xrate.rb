@@ -49,10 +49,10 @@ module Xrate
 
     response = connection.get("/rates?from=#{from}&to=#{to}")
 
-    raise "Invalid Xrate response: timestamp cannot be nil" if response.body['timestamp'].nil?
+    raise "Invalid Xrate response: :timestamp cannot be nil" if response.body['timestamp'].nil?
     raise "Invalid Xrate response: :from is (#{response.body['from']}) but was expecting (#{from})" if response.body['from'] != from
     raise "Invalid Xrate response: :to is (#{response.body['to']}) but was expecting (#{to})" if response.body['to'] != to
-    raise "Invalid Xrate response: timestamp cannot be nil" if response.body['spot_rate'].nil?
+    raise "Invalid Xrate response: :spot_rate cannot be nil" if response.body['spot_rate'].nil?
 
     response.body['spot_rate']
   end
