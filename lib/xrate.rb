@@ -43,7 +43,17 @@ module Xrate
 
   def self.get_spot_rate(params)
     raise ArgumentError.new('arguments must be a single key-value pair :from => :to') unless params.class == Hash && params.length == 1
-    response = connection.get("/rates?from=#{params.first[0]}&to=#{params.first[1]}")
-    response.body
+
+    from = params.first[0]
+    to = params.first[1]
+
+    response = connection.get("/rates?from=#{from}&to=#{to}")
+
+    raise "Invalid Xrate response: timestamp cannot be nil" if response.body['timestamp'].nil?
+    raise "Invalid Xrate response: :from is (#{response.body['from']}) but was expecting (#{from})" if response.body['from'] != from
+    raise "Invalid Xrate response: :to is (#{response.body['to']}) but was expecting (#{to})" if response.body['to'] != to
+    raise "Invalid Xrate response: timestamp cannot be nil" if response.body['spot_rate'].nil?
+
+    response.body['spot_rate']
   end
 end
